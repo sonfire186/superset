@@ -15,9 +15,11 @@
 # specific language governing permissions and limitations
 # under the License.
 from werkzeug.utils import secure_filename
+from slugify import slugify
 
 
 def get_filename(model_name: str, model_id: int, skip_id: bool = False) -> str:
-    slug = secure_filename(model_name)
+    model_name_fix = slugify(model_name)
+    slug = secure_filename(model_name_fix)
     filename = slug if skip_id else f"{slug}_{model_id}"
     return filename if slug else str(model_id)
