@@ -52,7 +52,7 @@ class ExportModelsCommand(BaseCommand):
             "type": self.dao.model_cls.__name__,  # type: ignore
             "timestamp": datetime.now(tz=timezone.utc).isoformat(),
         }
-        yield METADATA_FILE_NAME, yaml.safe_dump(metadata, sort_keys=False)
+        yield METADATA_FILE_NAME, yaml.safe_dump(metadata, sort_keys=False, allow_unicode=True)
 
         seen = {METADATA_FILE_NAME}
         for model in self._models:
